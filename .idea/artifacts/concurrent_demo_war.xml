@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="concurrent-demo:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="concurrent-demo.war">
+      <element id="artifact" artifact-name="concurrent-demo:war exploded" />
+    </root>
+  </artifact>
+</component>
