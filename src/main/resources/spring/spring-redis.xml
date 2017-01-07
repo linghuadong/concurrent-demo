@@ -19,6 +19,21 @@
         <property name="testOnBorrow" value="true"/>
     </bean>
 
+    <bean id="jedisPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+        <property name="maxIdle" value="30"/>
+        <property name="maxTotal" value="100"/>
+        <property name="maxWaitMillis" value="1500"/>
+        <property name="testOnBorrow" value="true"/>
+    </bean>
+
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="poolConfig"/>
+        <constructor-arg index="1" value="localhost"/>
+        <constructor-arg index="2" value="6379"/>
+        <constructor-arg index="3" value="1000"/>
+        <constructor-arg index="4" value="linghd"/>
+    </bean>
+
     <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="poolConfig" ref="poolConfig"/>
         <property name="port" value="6379"/>
@@ -29,6 +44,7 @@
 
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="enableTransactionSupport" value="true"/>
     </bean>
 
     <bean id="redisMessageListener" class="com.linghd.redis.RedisMessageListener"/>

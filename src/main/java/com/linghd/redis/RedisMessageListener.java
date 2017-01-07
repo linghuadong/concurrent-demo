@@ -31,16 +31,13 @@ public class RedisMessageListener implements MessageListener {
 
     @Transactional
     public void onMessage(Message message, byte[] bytes) {
+        System.out.println("111111");
         Order order = (Order) redisTemplate.getValueSerializer().deserialize(message.getBody());
-        try {
-            orderMapper.insert(order);
-            for (OrderLine orderLine : order.getOrderLines()) {
-                productMapper.updateStockQuantity(orderLine.getNum(), orderLine.getProductId());
-                orderLine.setOrderNumber(order.getNumber());
-                orderLineMapper.insert(orderLine);
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
+        orderMapper.insert(order);
+        for (OrderLine orderLine : order.getOrderLines()) {
+            productMapper.updateStockQuantity(orderLine.getNum(), orderLine.getProductId());
+            orderLine.setOrderNumber(order.getNumber());
+            orderLineMapper.insert(orderLine);
         }
     }
 }

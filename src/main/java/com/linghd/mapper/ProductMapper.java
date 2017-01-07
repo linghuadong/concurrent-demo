@@ -12,5 +12,5 @@ public interface ProductMapper {
 
     int updateStockQuantity(@Param("number") int number, @Param("id") long id);
 
-    int getStockQuantity(long id);
+    long getStockQuantity(long id);
 }

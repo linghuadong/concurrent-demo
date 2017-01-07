@@ -10,7 +10,7 @@
         UPDATE product SET sold_quantity=sold_quantity+1, stock_quantity=stock_quantity-#{number} WHERE id=#{id} AND stock_quantity>0;
     </update>
     
-    <select id="getStockQuantity" resultType="int" parameterType="long">
+    <select id="getStockQuantity" resultType="long" parameterType="long">
         select stock_quantity from product WHERE id=#{id};
     </select>
 </mapper>
